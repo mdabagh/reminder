@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReminderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(ReminderController::class)->group(function () {
+    Route::get('/', 'index')->name('reminder.index');
+    Route::post('/store', 'store')->name('reminder.store');
+    Route::get('/reminders/{reminder}/edit', 'edit')->name('reminder.edit');
+    Route::delete('/reminders/{reminder}', 'destroy')->name('reminder.destroy');
 });

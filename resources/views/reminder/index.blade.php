@@ -143,13 +143,32 @@
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold">Reminder List</h1>
-                    <ul class="list-group">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                        <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
-                    </ul>
+                    @if(count($reminders) > 0)
+                    <div class="row">
+                        @foreach($reminders as $reminder)
+                        <div class="col-md-4 mb-4">
+                            <div class="card {{ $reminder->is_past_due() ? 'bg-dark text-white' : '' }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $reminder->title }}</h5>
+                                    <p class="card-text mb-1"><strong>Date: </strong>{{ $reminder->date }}</p>
+                                    <p class="card-text mb-1"><strong>Time: </strong>{{ $reminder->time }}</p>
+                                    <p class="card-text mb-3"><strong>Category: </strong><span class="badge badge-primary">{{ $reminder->category->name_en }}</span></p>
+                                    <a href="{{ route('reminder.edit', $reminder->id) }}" class="btn btn-primary">Edit</a>
+                                    <form action="{{ route('reminder.destroy', $reminder->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    @else
+                    <div class="alert alert-primary" role="alert">
+                        No reminders found.
+                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -168,7 +187,7 @@
                                 <select id="category_id" class="form-select" name="category_id">
                                     <option selected>Choose...</option>
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
                                     @endforeach
                                 </select>
                             </div>
