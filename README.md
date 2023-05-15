@@ -2,6 +2,8 @@
 
 Reminder is a web application that allows users to create reminders and categorize them based on their preference. Users can set a specific date and time for each reminder. The categories can be customized to fit the user's needs, such as birthdays, work meetings, romantic dates, shopping lists, etc.
 
+![Screenshot of the Reminder App](https://github.com/mdabagh/reminder/blob/main/screenshot.png)
+
 ## Features
 
 - Simple reminder creation in customizable categories.
