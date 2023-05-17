@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoriesMain;
 use App\Models\Category;
 use App\Models\Reminder;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ class ReminderController extends Controller
         // $user_id = auth()->id();
         $user_id = 1;
         $reminders = Reminder::where('user_id', $user_id)->get();
-        $categories = Category::all();
+        $categories = Category::with('parent')->get();
+        $categoriesMine = CategoriesMain::all();
         $reminders = Reminder::orderBy('date', 'desc')->orderBy('time', 'desc')->get();
-        return view('reminder.index', compact('reminders', 'categories' ,'reminders'));
+        return view('reminder.index', compact('reminders', 'categories' ,'reminders' , 'categoriesMine'));
     }
     
     public function store(Request $request)
@@ -39,5 +41,28 @@ class ReminderController extends Controller
         $reminder->save();
 
         return redirect()->route('reminder.index')->with('success', 'Reminder created successfully.');
+    }
+
+    public function edit($reminder)
+    {
+        $reminder = Reminder::findOrFail($reminder);
+        $categories = Category::all();
+        return view('reminder.edit', compact('reminder' , 'categories' ));
+    }
+
+    public function update(Request $request, $reminder)
+    {
+        $reminder = Reminder::findOrFail($reminder);
+        $reminder->update($request->all());
+
+        return redirect()->route('reminder.index')->with('success', 'Reminder has been updated successfully.');
+    }
+
+    public function destroy($reminder)
+    {
+        $reminder = Reminder::findOrFail($reminder);
+        $reminder->delete();
+
+        return redirect()->route('reminder.index')->with('success', 'Reminder has been deleted successfully.');
     }
 }

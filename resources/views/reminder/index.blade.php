@@ -1,248 +1,107 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
+@extends('layout.master')
 
-<head>
-    <script src="/docs/5.3/assets/js/color-modes.js"></script>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.111.3">
-    <title>Reminder</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/jumbotron/">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
-    <meta name="theme-color" content="#712cf9">
-
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
-        }
-
-        .bd-mode-toggle {
-            z-index: 1500;
-        }
-    </style>
-
-
-</head>
-
-<body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check2" viewBox="0 0 16 16">
-            <path
-                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-            <path
-                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-            <path
-                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-            <path
-                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-        </symbol>
-    </svg>
-
-    <main>
-        <div class="container py-4">
-            <header class="pb-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2"
-                        viewBox="0 0 118 94" role="img">
-                        <title>Bootstrap</title>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
-                            fill="currentColor"></path>
-                    </svg>
-                    <span class="fs-4">Reminder</span>
-                </a>
-            </header>
-
-            <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">Reminder List</h1>
-                    @if(count($reminders) > 0)
-                    <div class="row">
-                        @foreach($reminders as $reminder)
-                        <div class="col-md-4 mb-4">
-                            <div class="card {{ $reminder->is_past_due() ? 'bg-dark text-white' : '' }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $reminder->title }}</h5>
-                                    <p class="card-text mb-1"><strong>Date: </strong>{{ $reminder->date }}</p>
-                                    <p class="card-text mb-1"><strong>Time: </strong>{{ $reminder->time }}</p>
-                                    <p class="card-text mb-3"><strong>Category: </strong><span class="badge badge-primary">{{ $reminder->category->name_en }}</span></p>
-                                    <a href="{{ route('reminder.edit', $reminder->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('reminder.destroy', $reminder->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    @else
-                    <div class="alert alert-primary" role="alert">
-                        No reminders found.
-                    </div>
-                    @endif
-                </div>
-            </div>
-
-            <div class="row align-items-md-stretch">
-                <div class="col-md-6">
-                    <div class="h-100 p-5 text-bg-dark rounded-3">
-                        <h2>Create Reminder</h2>
-                        <form class="row g-3" method="POST" action="{{ route('reminder.store') }}">
+@section('content')
+@if(session('success'))
+<div class="alert alert-success mt-2">
+    {{ session('success') }}
+</div>
+@endif
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Reminder List</h1>
+        @if(count($reminders) > 0)
+        <div class="row">
+            @foreach($reminders as $reminder)
+            <div class="col-md-4 mb-4">
+                <div class="card {{ $reminder->is_past_due() ? 'bg-dark text-white' : 'text-dark' }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $reminder->title }}</h5>
+                        <p class="card-text mb-1"><strong>Date: </strong>{{ $reminder->date }}</p>
+                        <p class="card-text mb-1"><strong>Time: </strong>{{ $reminder->time }}</p>
+                        <p class="card-text mb-3"><strong>Category: </strong><span class="">{{ $reminder->category->parent ? $reminder->category->parent->name_en . ' > ' : '' }}{{ $reminder->category->name_en }}</span></p>
+                        <a href="{{ route('reminder.edit', $reminder->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('reminder.destroy', $reminder->id) }}" method="POST" class="d-inline">
                             @csrf
-                            <div class="col-md-6">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control" id="title" name="title">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="category_id" class="form-label">Category</label>
-                                <select id="category_id" class="form-select" name="category_id">
-                                    <option selected>Choose...</option>
-                                    @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="date" name="date">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="time" class="form-label">Time</label>
-                                <input type="time" class="form-control" id="time" name="time">
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                        <h2>Create category</h2>
-                        <form class="row g-3">
-                            <div class="col-md-12">
-                                <label for="inputEmail4" class="form-label">title category</label>
-                                <input type="email" class="form-control" id="inputEmail4">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="inputState" class="form-label">Main category</label>
-                                <select id="inputState" class="form-select">
-                                    <option selected>Choose...</option>
-                                    <option>Birthday</option>
-                                    <option>Meeting</option>
-                                    <option>Holidays</option>
-                                    <option>Events</option>
-                                    <option>Educational</option>
-                                    <option>Work</option>
-                                    <option>Daily Tasks</option>
-                                    <option>Miscellaneous</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">submit</button>
-                            </div>
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
             </div>
-
-            <footer class="pt-3 mt-4 text-body-secondary border-top">
-                &copy; 2023
-            </footer>
+            @endforeach
         </div>
-    </main>
+        @else
+        <div class="alert alert-primary" role="alert">
+            No reminders found.
+        </div>
+        @endif
+    </div>
+</div>
 
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+            <h2>Create Reminder</h2>
+            <form class="row g-3" method="POST" action="{{ route('reminder.store') }}">
+                @csrf
+                <div class="col-md-6">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="col-md-6">
+                    <label for="category_id" class="form-label">Category</label>
+                    <select id="category_id" class="form-select" name="category_id">
+                        <option selected>Choose...</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->parent ? $category->parent->name_en . ' > ' : '' }}{{ $category->name_en }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+                <div class="col-md-6">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="time" name="time">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+            <h2>Create category</h2>
+            <form method="POST" action="{{ route('categories.store') }}">
+                @csrf
+            
+                <div class="form-group">
+                    <label for="name_en">Title Category (English)</label>
+                    <input type="text" class="form-control" name="name_en" id="name_en">
+                </div>
+            
+                <div class="form-group">
+                    <label for="name_fa">Title Category (Persian)</label>
+                    <input type="text" class="form-control" name="name_fa" id="name_fa">
+                </div>
+            
+                <div class="form-group">
+                    <label for="id_parent">Main Category</label>
+                    <select name="id_parent" id="id_parent" class="form-control">
+                        <option value="">No Parent</option>
+                        @foreach($categoriesMine as $categoryMine)
+                            <option value="{{ $categoryMine->id }}">{{ $categoryMine->name_en }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </form>
+          
+        </div>
+    </div>
+</div>
 
-
-</body>
-
-</html>
+@endsection
