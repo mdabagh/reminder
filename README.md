@@ -58,6 +58,25 @@ To use the application, follow these steps:
 
 4. View, edit, or delete your reminders as needed.
 
+
+## Release Notes
+### v1.0.0
+The initial release.
+
+### v1.0.1
+Added login functionality.
+
+### v1.0.2
+Added email and SMS reminders.
+Added Cron Job For Send.
+
+### v1.0.3
+Added import and export functionality.
+
+### v1.0.4
+Added Service Api
+
+
 ## License
 
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
