@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->time('time');
             $table->date('date');
+            $table->boolean('repeat_yearly')->default(false);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('user_id');

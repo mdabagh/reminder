@@ -9,8 +9,8 @@ class Reminder extends Model
 {
     protected $table = 'reminders';
 
-    protected $fillable = ['title', 'date', 'time', 'category_id', 'user_id'];
-
+    protected $fillable = ['title', 'date', 'time', 'category_id', 'user_id', 'repeat_yearly'];
+    
     /**
      * Get the category that owns the reminder.
      */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ReminderYearly;
 use App\Models\CategoriesMain;
 use App\Models\Category;
 use App\Models\Reminder;
@@ -25,18 +26,12 @@ class ReminderController extends Controller
             'category_id' => 'required',
             'date' => 'required|date',
             'time' => 'required',
+            'repeat_yearly' => 'nullable|boolean',
         ]);
 
-        $reminder = new Reminder();
-        $reminder->title = $validatedData['title'];
-        $reminder->category_id = $validatedData['category_id'];
-        $reminder->date = $validatedData['date'];
-        $reminder->time = $validatedData['time'];
-        $user_id = 1;
-        $reminder->user_id = $user_id;
+        $validatedData['user_id'] = auth()->id();
 
-        // $reminder->user_id = auth()->id();
-        $reminder->save();
+        Reminder::create($validatedData);
 
         return redirect()->route('reminder.index')->with('success', 'Reminder created successfully.');
     }
