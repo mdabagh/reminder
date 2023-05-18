@@ -48,7 +48,14 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
                             <h5 class="card-title">{{ $reminder->title }}</h5>
-                            <p class="card-text mb-1"><strong>Date: </strong>{{ $reminder->date }}</p>
+                            <p class="card-text mb-1">
+                                <strong>Date: </strong>
+                                @if ($reminder->repeat_yearly)
+                                    Every year on {{ substr($reminder->date, 5) }}
+                                @else
+                                    {{ $reminder->date }}
+                                @endif
+                            </p>
                             <p class="card-text mb-1"><strong>Time: </strong>{{ $reminder->time }}</p>
                             <p class="card-text mb-3"><strong>Category: </strong><span class="">{{ $reminder->category->parent ? $reminder->category->parent->name_en . ' > ' : '' }}{{ $reminder->category->name_en }}</span></p>
                         </div>
