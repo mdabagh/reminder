@@ -22,6 +22,7 @@
         <h1 class="display-5 fw-bold">Reminder List</h1>
         @if(count($reminders) > 0)
         <div class="row">
+            <div class="p-3"> <h5 class="card-title">Reminder Status</h5> <ul class="list-unstyled"> <li><span class="badge bg-dark">Overdue:</span> Reminder is past due and doesn't repeat yearly.</li> <li><span class="badge bg-secondary">Upcoming:</span> Reminder is upcoming and either repeats yearly or is within the next year.</li> <li><span class="badge bg-success">Due soon:</span> Reminder is due within the next 30 days.</li> </ul> </div>
             @foreach($reminders as $reminder)
             @php
                 $colorClass = '';
