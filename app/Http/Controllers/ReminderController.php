@@ -11,12 +11,10 @@ class ReminderController extends Controller
 {
     public function index()
     {
-        // $user_id = auth()->id();
-        $user_id = 1;
-        $reminders = Reminder::where('user_id', $user_id)->get();
-        $categories = Category::with('parent')->get();
+        $user_id = auth()->user()->id;
+        $reminders = Reminder::where('user_id', $user_id)->orderBy('date', 'desc')->orderBy('time', 'desc')->get();
+        $categories = Category::with('parent')->where('user_id', $user_id)->get();
         $categoriesMine = CategoriesMain::all();
-        $reminders = Reminder::orderBy('date', 'desc')->orderBy('time', 'desc')->get();
         return view('reminder.index', compact('reminders', 'categories' ,'reminders' , 'categoriesMine'));
     }
     

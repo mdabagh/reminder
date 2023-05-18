@@ -104,7 +104,7 @@
 
 </head>
 
-<body>
+<body >
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -125,12 +125,26 @@
         </symbol>
     </svg>
 
-    <main>
-        <div class="container py-4">
+    <main >
+        <div class="container py-4" > 
             <header class="pb-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                    <span class="fs-4">Reminder</span>
-                </a>
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                        <span class="fs-4">Reminder</span>
+                    </a>
+                    <form action="{{ route('language.switch') }}" method="POST" class="d-flex align-items-center">
+                        @csrf
+                        <select name="locale" id="locale" onchange="this.form.submit()" class="form-select">
+                            <option value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                            <option value="fa" {{ App::getLocale() == 'fa' ? 'selected' : '' }}>فارسی</option>
+                        </select>
+                    </form>
+                </div>
+                @if(Auth::check())
+                    <div class="mt-3">
+                        {{ __('auth.welcome_message', ['name' => Auth::user()->name]) }}
+                    </div>
+                @endif
             </header>
 
             @yield('content')

@@ -6,6 +6,17 @@
     {{ session('success') }}
 </div>
 @endif
+
+@if($errors->any())
+    <div class="alert alert-danger mt-2">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="p-5 mb-4 bg-body-tertiary rounded-3">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Reminder List</h1>

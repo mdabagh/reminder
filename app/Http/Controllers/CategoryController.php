@@ -21,8 +21,7 @@ class CategoryController extends Controller
         $category->name_en = $validatedData['name_en'];
         $category->name_fa = $validatedData['name_fa'];
         $category->id_parent = $validatedData['id_parent'];
-        // $category->user_id = auth()->user()->id; // با توجه به اینکه هر کاربر می‌تواند یک دستبندی شخصی داشته باشد، می‌توانید user_id را از شی Auth دریافت کنید.
-        $category->user_id = 1;
+        $category->user_id = auth()->user()->id; // با توجه به اینکه هر کاربر می‌تواند یک دستبندی شخصی داشته باشد، می‌توانید user_id را از شی Auth دریافت کنید.
 
         $category->save();
     
