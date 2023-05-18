@@ -2,7 +2,7 @@
 
 Reminder Application is a simple task management tool built with Laravel. It allows users to create reminders for various tasks and manage them easily.
 
-![Screenshot of the Reminder App](https://github.com/mdabagh/reminder/blob/main/Reminder.png)
+![Screenshot of the Reminder App](https://github.com/mdabagh/reminder/blob/main/Remind.png)
 
 ## Installation
 
