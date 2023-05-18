@@ -1,48 +1,64 @@
-# Reminder
+# Reminder Application
 
-Reminder is a web application that allows users to create reminders and categorize them based on their preference. Users can set a specific date and time for each reminder. The categories can be customized to fit the user's needs, such as birthdays, work meetings, romantic dates, shopping lists, etc.
+Reminder Application is a simple task management tool built with Laravel. It allows users to create reminders for various tasks and manage them easily.
 
 ![Screenshot of the Reminder App](https://github.com/mdabagh/reminder/blob/main/Reminder.png)
 
-## Features
+## Installation
 
-- Simple reminder creation in customizable categories.
-- Set specific date and time for each reminder.
-- Future releases will include login functionality.
-- Future releases will include email and SMS reminders.
-- Future releases will include the ability to import and export reminders to share with others.
+To install the application, follow these steps:
 
-## Future Releases
+1. Clone the repository using the command below:
+```bash
+git clone https://github.com/mdabagh/reminder.git
+```
 
-We are planning to add the following features in future releases:
+2. Create a new database for the application.
 
-- Login functionality.
-- Email and SMS reminders.
-- Import and export reminders to share with others.
-- Suggestions for new features are welcome, and users can contribute to the development of the application.
+3. Copy the `.env.example` file to `.env` and update the database information. You can do this using the command below:
+```bash
+cp .env.example .env
+```
 
-## Contributing
+4. Install the dependencies using Composer. Run the command below to install the dependencies:
+```bash
+composer install
+```
 
-We welcome contributions from the community. If you have any suggestions for new features or want to report a bug, please open an issue or pull request. 
+5. Generate an application key using the command below:
+```bash
+php artisan key:generate
+```
 
-## Release Notes
-### v1.0.0
-The initial release.
+6. Run the database migrations using the command below:
+```bash
+php artisan migrate
+```
 
-### v1.0.1
-Added login functionality.
+7. (Optional) Seed the database with initial data using the commands below:
+```bash
+php artisan db:seed --class=CategoriesMainSeeder
+php artisan db:seed --class=UsersTableSeeder
+```
+The above commands will create a test user with the following credentials:
+```
+Username: user1@example.com
+Password: 12345678
+```
 
-### v1.0.2
-Added email and SMS reminders.
+## Usage
 
-### v1.0.3
-Added import and export functionality.
+To use the application, follow these steps:
+
+1. Register a new account or login with an existing one.
+
+2. Create a new category for your reminders.
+
+3. Create a new reminder and assign it to a category.
+
+4. View, edit, or delete your reminders as needed.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Acknowledgments
-
-- We thank all the contributors who have helped make Reminder a reality.
-- We thank the open-source community for their contributions and support.
