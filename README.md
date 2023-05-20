@@ -1,4 +1,4 @@
-# Reminder Application
+## Reminder Application
 
 Reminder Application is a simple task management tool built with Laravel. It allows users to create reminders for various tasks and manage them easily.
 
@@ -40,7 +40,7 @@ php artisan migrate
 php artisan db:seed --class=CategoriesMainSeeder
 php artisan db:seed --class=UsersTableSeeder
 ```
-The above commands will create a test user with the following credentials:
+The above commands will create a test user with thefollowing credentials:
 ```
 Username: user1@example.com
 Password: 12345678
@@ -58,26 +58,55 @@ To use the application, follow these steps:
 
 4. View, edit, or delete your reminders as needed.
 
+## Setting up a Cron Job for Sending Reminders
 
-## Release Notes
-### v1.0.0
-The initial release.
+To set up a cron job in CentOS 7 to send reminders using the Reminder Application, follow these steps:
 
-### v1.0.1
-Added login functionality.
+1. Create a bash script file with the `curl` command inside. For example, create a file named `reminder-curl.sh` with the following content:
 
-### v1.0.2
-Added email and SMS reminders.
-Added Cron Job For Send.
+   `````bash
+   #!/bin/bash
 
-### v1.0.3
-Added import and export functionality.
+   token="YOUR_TOKEN"
+   curl -X POST -d "token=${token}" http://www.example.com/reminders/check >/dev/null 2>&1
+   ```
 
-### v1.0.4
-Added Service Api
+   Replace `YOUR_TOKEN` with your own token.
 
+2. Make the bash script file executable with the command:
 
-## License
+   ```bash
+   chmod +x reminder-curl.sh
+   ```
 
-This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Edit the cron job file with the command:
 
+   ````bash
+   crontab -e
+   ```
+
+4. Add a new line to the end of the file to specify the frequency of the cron job and the path to the bash script file. For example, to run the script every 10 minutes, add the following line:
+
+   ````cron
+   */10 * * * * /path/to/reminder-curl.sh
+   ```
+
+   Replace `/path/to` with the actual path to the bash script file.
+
+5. Save and exit the file. The cron job will now run according to the specified schedule.
+
+## Configuring the Token
+
+To configure the token in Linux, you need to set the token value in the `.env` file in the Reminder Application. Here's how you can do it:
+
+1. Open the `.env` file in the Reminder Application.
+
+2. Find the line that starts with `APP_TOKEN=` and set the value to your token. For example:
+
+   ````env
+   APP_TOKEN=123456789
+   ```
+
+3. Save and close the file.
+
+That's it! You have now set up a cron job in CentOS 7 to send reminders using the Reminder Application, and configured the token for the application.
