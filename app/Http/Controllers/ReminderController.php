@@ -67,9 +67,20 @@ class ReminderController extends Controller
         $AppToken = env('APP_TOKEN');
         if (hash_equals($tokenHash, hash('sha256', $AppToken))) {
             // یافتن تمام یادآور‌هایی که یک ساعت یا کمتر تا زمانشان باقی مانده است
-            $reminders = Reminder::where('date', '=', date('Y-m-d'))
-                ->whereBetween('time', [date('H:i'), date('H:i', strtotime('+1 hour'))])
-                ->get();
+              $reminders = Reminder::where(function ($query) {
+                $query->where('date', '=', date('Y-m-d'))
+                    ->whereBetween('time', [
+                        date('H:i'),
+                        date('H:i', strtotime('+1 hour'))
+                    ]);
+            })->orWhere(function ($query) {
+                $query->where('repeat_yearly', '=', true)
+                    ->where('date', 'like', '%' . date('-m-d'))
+                    ->whereBetween('time', [
+                        date('H:i'),
+                        date('H:i', strtotime('+1 hour'))
+                    ]);
+            })->get();
 
             // ارسال ایمیل به ایجاد کننده یادآور
             foreach ($reminders as $reminder) {
