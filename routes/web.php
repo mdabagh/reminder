@@ -50,3 +50,5 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
 });
+
+Route::post('/reminders/check', [ReminderController::class, 'checkReminders']);
