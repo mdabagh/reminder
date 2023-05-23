@@ -26,7 +26,19 @@ class ReminderApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'category_id' => 'required',
+            'date' => 'required|date',
+            'time' => 'required',
+            'repeat_yearly' => 'nullable|boolean',
+        ]);
+
+        $validatedData['user_id'] = auth()->id();
+
+        $reminder = Reminder::create($validatedData);
+
+        return response()->json(['reminder' => $reminder], 201);
     }
 
     /**
