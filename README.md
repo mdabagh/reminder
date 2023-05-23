@@ -110,3 +110,88 @@ To configure the token in Linux, you need to set the token value in the `.env` f
 3. Save and close the file.
 
 That's it! You have now set up a cron job in CentOS 7 to send reminders using the Reminder Application, and configured the token for the application.
+
+
+
+---
+
+
+# Reminder API
+
+A simple API built with Laravel Sanctum for managing reminders and categories.
+
+## Authentication
+
+To authenticate with the API, send a POST request to `/api/login` with your email and password in the request body. You will receive an API token in the response, which can be used to authenticate subsequent requests.
+
+## Endpoints
+
+The following endpoints are available in the API:
+
+### Reminders
+
+To access reminders endpoints, authentication with an API token is required.
+
+#### Get all reminders
+
+```
+GET /api
+```
+
+#### Create a new reminder
+
+```
+POST /api/reminders/store
+```
+
+#### Get a reminder by ID
+
+```
+GET /api/reminders/{id}/edit
+```
+
+#### Update a reminder
+
+```
+PUT /api/reminders/{id}
+```
+
+#### Delete a reminder
+
+```
+DELETE /api/reminders/{id}
+```
+
+### Categories
+
+To access categories endpoints, authentication with an API token is required.
+
+#### Create a new category
+
+```
+POST /api/categories/store
+```
+
+## Usage
+
+To use the API, send requests with the required parameters. For GET requests, include your API token in the `Authorization` header.
+
+For example, to get all reminders:
+
+```
+GET /api
+Authorization: Bearer your-api-token
+```
+
+To create a new category:
+
+```
+POST /api/categories/store
+Authorization: Bearer your-api-token
+```
+
+For more information on the available endpointsand their parameters, see the documentation in the code.
+
+## Conclusion
+
+This API provides a simple and secure way to manage reminders and categories. By following the instructions in this document, you can easily authenticate with the API and use its endpoints to create, read, update, and delete reminders and categories.
