@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Controllers\Api\ReminderApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,10 @@ Route::get('/user/logout', function (){
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', [ReminderApiController::class, 'index']);
-    Route::post('/store', [ReminderApiController::class, 'store']);
+    Route::post('/reminders/store', [ReminderApiController::class, 'store']);
     Route::get('/reminders/{id}/edit', [ReminderApiController::class, 'show']);
     Route::put('/reminders/{id}', [ReminderApiController::class, 'update']);
     Route::delete('/reminders/{id}', [ReminderApiController::class, 'destroy']);
+
+    Route::post('/categories/store', [CategoryApiController::class, 'store']);
 });
