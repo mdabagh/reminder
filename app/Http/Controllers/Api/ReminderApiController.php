@@ -47,22 +47,45 @@ class ReminderApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reminder = Reminder::find($id);
+
+        if (!$reminder) {
+            return response()->json(['message' => 'Reminder not found'], 404);
+        }
+
+        $categories = Category::all();
+
+        return response()->json(['reminder' => $reminder,    'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $reminder = Reminder::find($id);
 
+        if (!$reminder) {
+            return response()->json(['message' => 'Reminder not found'], 404);
+        }
+
+        $reminder->update($request->all());
+
+        return response()->json(['reminder' => $reminder, 'message' => 'Reminder updated successfully']);
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $reminder = Reminder::find($id);
+    
+        if (!$reminder) {
+            return response()->json(['message' => 'Reminder not found'], 404);
+        }
+    
+        $reminder->delete();
+    
+        return response()->json(['message' => 'Reminder deleted successfully']);
     }
 }

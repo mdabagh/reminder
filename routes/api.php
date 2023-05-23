@@ -26,7 +26,7 @@ Route::get('/user/logout', function (){
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', [ReminderApiController::class, 'index']);
     Route::post('/store', [ReminderApiController::class, 'store']);
-    Route::get('/reminders/{reminder}/edit', [ReminderApiController::class, 'edit']);
-    Route::put('/reminders/{reminder}', [ReminderApiController::class, 'update']);
-    Route::delete('/reminders/{reminder}', [ReminderApiController::class, 'destroy']);
+    Route::get('/reminders/{id}/edit', [ReminderApiController::class, 'show']);
+    Route::put('/reminders/{id}', [ReminderApiController::class, 'update']);
+    Route::delete('/reminders/{id}', [ReminderApiController::class, 'destroy']);
 });
